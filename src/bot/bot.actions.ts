@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { Subject } from 'rxjs';
 import { assign } from 'xstate';
 
-import { BotContext, BotEvent } from './bot.interface';
+import { BotContext, BotEvent, ByeEvent, GreetEvent } from './bot.interface';
 import { OutgoingMessage } from './models';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class BotActions {
   utterIntroduction(
     dispatcher: Subject<OutgoingMessage>,
     context: BotContext,
-    event: BotEvent,
+    event: GreetEvent,
   ): void {
     return dispatcher.next({
       text: 'Hi! 我是西门良。请给我留言，我会尽快回复你的。',
@@ -23,10 +23,13 @@ export class BotActions {
   utterGoodbye(
     dispatcher: Subject<OutgoingMessage>,
     context: BotContext,
-    event: BotEvent,
+    event: ByeEvent,
   ): void {
     return dispatcher.next({
-      text: '如果您有任何疑问，可以回复任意消息重新激活。',
+      text: '本次会话已结束。如果您有任何疑问，可以回复任意消息重新激活。',
+      custom: {
+        msg_code: event.msg_code,
+      },
     });
   }
 
