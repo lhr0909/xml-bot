@@ -10,9 +10,12 @@ export type GreetEvent = {
   sender?: string;
 };
 
-export type FileUploadedEvent = { type: 'file_uploaded'; file_url: string };
+export type ByeEvent = {
+  type: 'bye';
+  msg_code: string;
+};
 
-export type BotEvent = UnknownEvent | GreetEvent | FileUploadedEvent;
+export type BotEvent = UnknownEvent | GreetEvent | ByeEvent;
 
 export interface BotContext {
   sender_id: string;

@@ -1,5 +1,5 @@
 export interface OutgoingMessage {
-  text: string;
+  text?: string;
   buttons?: Array<{
     title: string;
     payload: string;

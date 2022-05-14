@@ -12,11 +12,16 @@ const machineConfig = {
         greet: {
           actions: ['utter_introduction', 'action_listen'],
         },
-        file_uploaded: {
-          actions: ['utter_uploaded', 'action_listen'],
+        bye: {
+          actions: ['utter_goodbye', 'action_listen'],
         },
         '*': {
-          actions: ['utter_ask_rephrase', 'action_listen'],
+          actions: [
+            'utter_ask_rephrase',
+            'utter_connect_agent',
+            'action_switch_to_agent',
+            'action_listen',
+          ],
         },
       },
     },
